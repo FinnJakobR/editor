@@ -7,7 +7,48 @@
 #include "./common.h"
 
 void editor_backspace(Editor *e)
-{
+{   
+
+    if(e->selection){
+        e->selection = false;
+        
+        if(e->select_begin < e->cursor) {
+        
+        while (e->cursor != e->select_begin)
+            {
+                memmove(
+                &e->data.items[e->cursor - 1],
+                &e->data.items[e->cursor],
+                e->data.count - e->cursor
+            );
+            e->cursor -= 1;
+            e->data.count -= 1;
+         }
+        
+        }
+
+
+        if(e->select_begin > e->cursor){
+             
+        while (e->cursor != e->select_begin)
+            {
+                memmove(
+                &e->data.items[e->select_begin - 1],
+                &e->data.items[e->select_begin],
+                e->data.count - e->select_begin
+            );
+            e->select_begin -= 1;
+            e->data.count -= 1;
+          }
+
+
+        }
+
+        editor_retokenize(e);
+
+        return;
+    }
+
     if (e->searching) {
         if (e->search.count > 0) {
             e->search.count -= 1;
@@ -34,6 +75,7 @@ void editor_delete(Editor *e)
     if (e->searching) return;
 
     if (e->cursor >= e->data.count) return;
+
     memmove(
         &e->data.items[e->cursor],
         &e->data.items[e->cursor + 1],
