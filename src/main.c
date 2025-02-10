@@ -444,4 +444,3 @@ int main(int argc, char **argv)
 
 // TODO: ability to search within file browser
 // Very useful when you have a lot of files
-// TODO: ability to remove trailing whitespaces
