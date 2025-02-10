@@ -25,6 +25,18 @@ typedef enum {
 } JSON_TYPE;
 
 
+typedef enum {
+  SQUARE_OPEN_BRACKET,
+  SQUARE_CLOSE_BRACKET,
+  CURLY_OPEN_BRACKET,
+  CURLY_CLOSE_BRACKET,
+  SYMBOL,
+  COMMA,
+  DOUBLE_POINT,
+  SPACE,
+} TOKEN_TYPE;
+
+
 typedef struct 
 {
     char* data;
